@@ -1,0 +1,52 @@
+[user]
+	name = Octávio Richter
+	email = 4429577+OctavioBR@users.noreply.github.com
+	signingkey = 567A2A0BBAD826A2
+[core]
+	excludesfile = ~/.gitignore_global
+	pager = diff-so-fancy | less --tabs=4 -RFX
+	editor = micro
+	ignorecase = false
+	autocrlf = input
+[alias]
+	co = checkout
+	st = status --short --branch
+	lg = log --color --graph
+	amend = commit --amend --no-edit
+	pushf = push --force-with-lease
+	fixup = commit --fixup
+	branches = branch --all
+	remotes = remote --verbose
+	ver = describe --tags
+	squash = "!f(){ git reset --soft HEAD~${1} && git commit --edit -m\"$(git log --format=%B --reverse HEAD..HEAD@{1})\"; };f"
+[color]
+	ui = 1
+[push]
+	default = current
+[pull]
+	rebase = true
+[fetch]
+	prune = true
+[status]
+	showuntrackedfiles = all
+[credential]
+	helper = cache --timeout=36000
+[format]
+	pretty = %Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset
+[color "diff-highlight"]
+	oldNormal = red bold
+	oldHighlight = red bold 52
+	newNormal = green bold
+	newHighlight = green bold 22
+[color "diff"]
+	meta = 227
+	frag = magenta bold
+	commit = 227 bold
+	old = red bold
+	new = green bold
+	whitespace = red reverse
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true

@@ -1,0 +1,16 @@
+# My workstation config 👨‍💻
+- **zsh**
+  - [pure](https://github.com/sindresorhus/pure)
+  - [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)
+- **git**
+  - [diff-so-fancy](https://github.com/so-fancy/diff-so-fancy)
+- **ssh**
+- **gpg**
+  - key `A605E8F79D6E06D199643C81567A2A0BBAD826A2` ([how-to](https://access.redhat.com/solutions/2115511))
+- **docker**
+- **nodejs** with **npm**
+- **golang**
+- **gcloud**
+- **terraform**
+- [**micro**](https://micro-editor.github.io/)
+- [**vs-code**](https://code.visualstudio.com/download)
