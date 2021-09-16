@@ -41,7 +41,6 @@ alias dm=docker-machine
 alias kb=kubectl
 alias kbctx="kubectl config current-context"
 alias kbcat="cat <<EOF | kubectl create -f -"
-alias kbp="HTTPS_PROXY=127.0.0.1:8001 kubectl"
 # VirtualBox
 # alias vbm=VBoxManage
 # alias vbh=VBoxHeadless
@@ -52,20 +51,30 @@ alias github='cd ~/Code/github'
 # Yarn query latest package release
 function yarn-latest() { yarn info $1 dist-tags.latest }
 
-function clean-ds-store() {find . -name '.DS_Store' -type f -delete}
+function clean-ds-store() { find . -name '.DS_Store' -type f -delete }
 
-function mkcdir() { mkdir -p -- "$1" && cd -P -- "$1"}
+function mkcdir() { mkdir -p -- "$1" && cd -P -- "$1" }
 
-function psql_agt_dev() {
-    psql "hostaddr=127.0.0.1 dbname=agatha sslmode=verify-ca \
-      sslrootcert=/home/octavio/.ssh/agatha/dev/server-ca.pem \
-      sslcert=/home/octavio/.ssh/agatha/dev/client-cert.pem \
-      sslkey=/home/octavio/.ssh/agatha/dev/client-key.pem \
-      user=$1"
-}
+function kbp() { HTTPS_PROXY=127.0.0.1:8002 command kubectl "$@" }
+unalias gke
+function gke() {
+  port="8002"
+  cluster="gkeblack"
+  if [[ $2 =~ ^(gkewhite|white)$ ]]; then cluster="gkewhite"; fi
 
-function bastion-dev() {
-  gcloud compute ssh platform-edge-bastion-dev-vm-1 --project=platform-edge-dev-9367 --zone=us-east1-b -- -vNL ${2}:${1}:${2}
+  pid=$(lsof -ti :$port)
+  if [[ -n $pid ]]; then kill $pid; fi
+
+  if [[ $1 == "dev" ]]; then
+    gcloud container clusters get-credentials "platform-appserver-$cluster-dev-cluster" \
+      --internal-ip --project=platform-appserver-dev-4325 --region=us-east1
+    gcloud compute ssh "platform-edge-bastion-dev-vm-1" --project=platform-edge-dev-9367 -- -fNL $port:127.0.0.1:8888
+  fi
+  if [[ $1 == "prd" ]]; then
+    gcloud container clusters get-credentials "platform-appserver-$cluster-prd-cluster" \
+      --internal-ip --project=platform-appserver-prd-6828 --region=us-east1
+    gcloud compute ssh "platform-edge-bastion-prd-vm-1" --project=platform-edge-prd-7459 -- -fNL $port:127.0.0.1:8888
+  fi
 }
 
 # Tilix fixes to open tiles in same PWD
