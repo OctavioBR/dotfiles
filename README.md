@@ -14,3 +14,4 @@
 - **terraform**
 - [**micro**](https://micro-editor.github.io/)
 - [**vs-code**](https://code.visualstudio.com/download)
+- **fira-code** font
