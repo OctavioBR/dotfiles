@@ -13,6 +13,12 @@
       "command": "paste",
       "keys": "ctrl+v"
     },{
+      "command": "scrollUpPage",
+      "keys": "shift+pageup"
+    },{
+      "command": "scrollDownPage",
+      "keys": "shift+pagedown"
+    },{
       "command": "newTab",
       "keys": "ctrl+t"
     },{
