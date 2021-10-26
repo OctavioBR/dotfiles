@@ -1,0 +1,14 @@
+/*
+Hide the "Tree Style Tab" & "Sidebery" header at the top of the sidebar
+*/
+#sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"] #sidebar-header {
+  display: none;
+}
+#sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"] #sidebar-header {
+  display: none;
+}
+
+/* Remove original tabs */
+#TabsToolbar {
+  display: none;
+}
