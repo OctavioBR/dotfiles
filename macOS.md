@@ -8,7 +8,7 @@ brew install pure tree zsh-syntax-highlighting micro diff-so-fancy terraform aws
 
 # Install casks
 brew tap homebrew/cask-fonts
-brew install --cask alt-tab linearmouse macs-fan-control alfred iterm2 istat-menus aerial docker google-cloud-sdk spotify gpg-suite font-fira-code firefox 1password visutal-studio-code dozer rectangle
+brew install --cask alt-tab linearmouse macs-fan-control alfred iterm2 istat-menus aerial docker google-cloud-sdk spotify gpg-suite font-fira-code microsoft-edge firefox 1password visutal-studio-code dozer rectangle
 
 # Fix zsh-syntax-highlighting to be sourced by oh-my-zsh
 cp -r /usr/local/share/zsh-syntax-highlighting $ZSH_CUSTOM/plugins/zsh-syntax-highlighting
