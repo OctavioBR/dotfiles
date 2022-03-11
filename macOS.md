@@ -3,6 +3,8 @@
 xcode-select --install
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
+# TODO: port homebrew to use `brew bundle dump`!
+
 # Install CLI packages
 brew install pure tree zsh-syntax-highlighting micro diff-so-fancy terraform awscli node corepack go sqlite xz helm htop pulumi
 
