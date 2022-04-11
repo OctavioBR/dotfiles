@@ -47,7 +47,7 @@ sudo /usr/bin/env bash -c "cat > /Library/LaunchAgents/org.custom.tilde-switch.p
 </plist>
 EOF
 
-sudo launchctl load -w -- /Library/LaunchAgents/org.custom.tilde-switch.plist
+launchctl bootstrap gui/$(id -u) /Library/LaunchAgents/org.custom.tilde-switch.plist
 ```
 Fix HiDPI for external displays with:
 https://github.com/mlch911/one-key-hidpi
