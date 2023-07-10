@@ -14,10 +14,11 @@
 	lg = log --color --graph
 	amend = commit --amend --no-edit
 	pushf = push --force-with-lease
+	pushs = push --push-option=ci.skip
 	fixup = commit --fixup
 	branches = branch --all
 	remotes = remote --verbose
-	ver = describe --tags
+	ver = describe --tags --always
 	squash = "!f(){ git reset --soft HEAD~${1} && git commit --edit -m\"$(git log --format=%B --reverse HEAD..HEAD@{1})\"; };f"
 [color]
 	ui = 1
@@ -50,3 +51,12 @@
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
+[commit]
+	gpgsign = true
+[init]
+	defaultBranch = main
+[includeIf "gitdir:~/Code/github/FundingCircle/"]
+	[user]
+		name = Octavio Richter
+		email = octavio.richter@fundingcircle.com
+		signingkey = 9DAF360037076739
