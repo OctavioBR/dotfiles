@@ -83,6 +83,16 @@ function imagescan() {
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 [[ $commands[kubectl] ]] && source <(kubectl completion zsh)
 
+# https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/lib/directories.zsh
+setopt auto_cd
+setopt auto_pushd
+setopt pushd_ignore_dups
+setopt pushdminus
+alias -g ...='../..'
+alias -g ....='../../..'
+alias -g .....='../../../..'
+alias -g ......='../../../../..'
+
 #-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#
 # Use emacs key bindings
 bindkey -e
