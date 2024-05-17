@@ -21,6 +21,19 @@ wsl --install -d Ubuntu-24.04
 wsl --set-default Ubuntu-24.04
 
 ```
+on WSL:
+```sh
+# sudores withouth password
+sudo visudo
+# add on las line:
+octavio ALL=(ALL) NOPASSWD: ALL
+sudo apt update
+sudo apt upgrade
+sudo apt install zsh
+mkdir -p "$HOME/.zsh"
+git clone --depth 1 https://github.com/sindresorhus/pure.git "$HOME/.zsh/pure"
+chsh -s $(which zsh)
+```
 
 - **zsh**
   - [pure](https://github.com/sindresorhus/pure)
