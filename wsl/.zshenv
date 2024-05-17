@@ -1,7 +1,6 @@
 # PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
-export GTK_IM_MODULE=cedilla
 export TERM="xterm-256color"
 export SSH_KEY_PATH="~/.ssh/id_ed25519"
 export MICRO_TRUECOLOR=1
@@ -24,10 +23,6 @@ PATH="$HOME/.local/bin:$PATH"
 # Krew
 PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
-# Rancher desktop
-[ -d $HOME/.rd/bin ] && PATH="$PATH:$HOME/.rd/bin"
-export LIMA_HOME="$HOME/Library/Application Support/rancher-desktop/lima"
-
 export PATH
 export MANPATH
 
@@ -37,8 +32,6 @@ if [[ -n $SSH_CONNECTION ]]; then
 else
   export EDITOR='micro'
 fi
-# Emacs alternate editor
-export ALTERNATE_EDITOR=micro
 
-# Load zsh-syntax-highlighting from brew
+# Load zsh-syntax-highlighting
 export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR="/opt/homebrew/share/zsh-syntax-highlighting/highlighters"
