@@ -5,13 +5,14 @@ export TERM="xterm-256color"
 export SSH_KEY_PATH="~/.ssh/id_ed25519"
 export MICRO_TRUECOLOR=1
 
+# Load NVM
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 # Node
 NPM_PACKAGES="$HOME/.npm-packages"
 PATH="$NPM_PACKAGES/bin:$PATH"
 MANPATH="$MANPATH:$NPM_PACKAGES/share/man"
-# Load NVM
-export NVM_DIR="$HOME/.nvm"
-[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"
 
 # Go workspace
 export GOPATH="$HOME/Code/go"

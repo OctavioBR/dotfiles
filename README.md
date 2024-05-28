@@ -33,6 +33,9 @@ sudo apt install zsh
 mkdir -p "$HOME/.zsh"
 git clone --depth 1 https://github.com/sindresorhus/pure.git "$HOME/.zsh/pure"
 chsh -s $(which zsh)
+
+# Install NVM
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 ```
 
 - **zsh**
