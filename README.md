@@ -1,6 +1,7 @@
 # My workstation config 👨‍💻 (Windows)
 ```powershell
 winget install Microsoft.PowerToys --source winget
+winget install --id Microsoft.PowerShell --source winget
 
 # Install scoop with utility apps
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
