@@ -1,4 +1,7 @@
 # PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+# export LANGUAGE=en_US
+# export GTK_IM_MODULE=cedilla
+# export GPG_TTY=$(tty) # For WSL2
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 export TERM="xterm-256color"
@@ -24,6 +27,12 @@ PATH="$HOME/.local/bin:$PATH"
 # Krew
 PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
+# Pulumi
+PATH="$PATH:$HOME/.pulumi/bin"
+
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+
 export PATH
 export MANPATH
 
@@ -33,3 +42,5 @@ if [[ -n $SSH_CONNECTION ]]; then
 else
   export EDITOR='micro'
 fi
+# Emacs alternate editor
+export ALTERNATE_EDITOR=micro
