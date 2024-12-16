@@ -23,3 +23,9 @@ customzsh="$HOME/.config/zsh"
 [ -f "$customzsh/completions.sh" ] && source "$customzsh/completions.sh"
 [ -f "$customzsh/aliases.sh" ] && source "$customzsh/aliases.sh"
 [ -f "$customzsh/keys.sh" ] && source "$customzsh/keys.sh"
+
+# https://learn.microsoft.com/en-us/windows/terminal/tutorials/new-tab-same-directory#zsh
+keep_current_path() {
+  printf "\e]9;9;%s\e\\" "$(wslpath -w "$PWD")"
+}
+precmd_functions+=(keep_current_path)
