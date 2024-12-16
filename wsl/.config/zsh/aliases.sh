@@ -17,7 +17,7 @@ function whichl() { readlink $(which $1) }
 function kbp() { HTTPS_PROXY=127.0.0.1:8002 command kubectl "$@" }
 
 # Download the file and extract its contents in the current directory
-function unzipfromurl() { wget -qO- "$1" | tar -xzv }
+function wgettz() { wget -qO- "$1" | tar -xzv }
 
 # Swich aws-cli profiles
 function awsp() { [ -z "$1" ] && echo $AWS_PROFILE || export AWS_PROFILE=$1 }
