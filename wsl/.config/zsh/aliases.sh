@@ -46,6 +46,7 @@ alias dci="docker rmi -f $(docker images --filter 'dangling=true' -q | tr '\n' '
 
 # Fix terraform aws-cli output requirement
 alias terraform="AWS_DEFAULT_OUTPUT=json terraform $1"
+alias tfgrapth="terraform plan -out=plan && terraform show -json plan > plan.ignored.tfgraph && rm plan"
 
 # WSL2 ports
 alias pbcopy="clip.exe"
