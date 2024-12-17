@@ -1,4 +1,4 @@
-# https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/lib/directories.zsh
+# https://github.com/ohmyzsh/ohmyzsh/blob/master/lib/directories.zsh
 setopt auto_cd
 setopt auto_pushd
 setopt pushd_ignore_dups
@@ -8,6 +8,10 @@ alias -g ....='../../..'
 alias -g .....='../../../..'
 alias -g ......='../../../../..'
 
+# https://github.com/ohmyzsh/ohmyzsh/blob/master/lib/theme-and-appearance.zsh
+alias ls='ls --color=auto'
+
+# https://github.com/ohmyzsh/ohmyzsh/blob/master/lib/key-bindings.zsh
 # Use emacs key bindings
 bindkey -e
 

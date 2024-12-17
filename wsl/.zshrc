@@ -20,9 +20,9 @@ if [ -x "$(command -v rbenv)" ]; then
 fi
 
 customzsh="$HOME/.config/zsh"
-[ -f "$customzsh/completions.sh" ] && source "$customzsh/completions.sh"
 [ -f "$customzsh/aliases.sh" ] && source "$customzsh/aliases.sh"
-[ -f "$customzsh/keys.sh" ] && source "$customzsh/keys.sh"
+[ -f "$customzsh/ohmyzsh.sh" ] && source "$customzsh/ohmyzsh.sh"
+[ -f "$customzsh/completions.sh" ] && source "$customzsh/completions.sh"
 
 # https://learn.microsoft.com/en-us/windows/terminal/tutorials/new-tab-same-directory#zsh
 keep_current_path() {
