@@ -44,8 +44,11 @@ alias kbnodes="kubectl get nodes -o custom-columns='TYPE:metadata.labels.type,ZO
 alias neat="kubectl neat | yq"
 alias dci="docker rmi -f $(docker images --filter 'dangling=true' -q | tr '\n' ' ')" # → docker system prune
 
-# Fix required aws-cli output for terraform
+# Fix terraform aws-cli output requirement
 alias terraform="AWS_DEFAULT_OUTPUT=json terraform $1"
 
+# WSL2 ports
+alias pbcopy="clip.exe"
+
 # Project home links
-alias github='cd ~/Code/github'
+alias github='cd ~/Code/github.com'
