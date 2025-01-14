@@ -3,8 +3,8 @@ todo.md
 *.ignored*
 
 # Editor Files #
-.idea
-.vscode
+# .idea
+# .vscode
 .dir-locals.el
 
 ######OCTOCAT######
