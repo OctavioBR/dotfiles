@@ -30,8 +30,12 @@ PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 # Pulumi
 PATH="$PATH:$HOME/.pulumi/bin"
 
+# Java
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+
+# Open terminal links in win browser (depends on wslu)
+export BROWSER=wslview
 
 export PATH
 export MANPATH
