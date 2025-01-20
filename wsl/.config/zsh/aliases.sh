@@ -41,7 +41,7 @@ alias dcp=docker-compose
 alias kb=kubectl
 alias kbcat="cat <<EOF | kubectl create -f -"
 alias kbnodes="kubectl get nodes -o custom-columns='TYPE:metadata.labels.type,ZONE:metadata.labels.failure-domain\.beta\.kubernetes\.io/zone,INSTANCE_TYPE:metadata.labels.beta\.kubernetes\.io/instance-type,CPUs:metadata.labels.karpenter\.k8s\.aws/instance-cpu,MEMORY:metadata.labels.karpenter\.k8s\.aws/instance-memory,PODS:metadata.labels.karpenter\.k8s\.aws/instance-pods,NAME:metadata.name'"
-alias neat="kubectl neat | yq"
+alias neat="kubectl neat | yq eval -P"
 alias dci="docker rmi -f $(docker images --filter 'dangling=true' -q | tr '\n' ' ')" # → docker system prune
 
 # Fix terraform aws-cli output requirement
