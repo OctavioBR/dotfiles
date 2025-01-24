@@ -22,6 +22,14 @@ function wgettz() { wget -qO- "$1" | tar -xzv }
 # Swich aws-cli profiles
 function awsp() { [ -z "$1" ] && echo $AWS_PROFILE || export AWS_PROFILE=$1 }
 
+# Fix corrupt .zsh_history
+function fix-zsh-history() {
+  mv ~/.zsh_history ~/.zsh_history_corrupt
+  strings ~/.zsh_history_corrupt > ~/.zsh_history
+  fc -R ~/.zsh_history
+  rm ~/.zsh_history_corrupt
+}
+
 # Custom Aliases
 alias ll="ls -l"
 alias la="ls -A"
