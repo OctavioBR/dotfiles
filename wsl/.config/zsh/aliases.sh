@@ -30,6 +30,33 @@ function fix-zsh-history() {
   rm ~/.zsh_history_corrupt
 }
 
+function kbnodes() {
+  kubectl get nodes -o json | jq -r '
+  def since($time):
+    (now - ($time | fromdate)) as $diff |
+    if $diff > 86400 then "\(( $diff / 86400 ) | floor)d"
+    elif $diff > 3600 then "\(( $diff / 3600 ) | floor)h"
+    else "\(( $diff / 60 ) | floor)m"
+    end;
+
+  ["NAME", "NODE-TYPE", "AGE", "STATUS", "INSTANCE_TYPE", "CPUs", "MEMORY"],
+  (
+    .items
+    | sort_by(.metadata.creationTimestamp | fromdate)
+    | .[]
+    | [
+        .metadata.name,
+        (.metadata.labels["node-type"] // "N/A"),
+        since(.metadata.creationTimestamp),
+        (.status.conditions[] | select(.type=="Ready") | .type),
+        (.metadata.labels["beta.kubernetes.io/instance-type"] // .metadata.labels["node.kubernetes.io/instance-type"] // "N/A"),
+        .status.capacity.cpu,
+        (.status.capacity.memory | sub("Ki"; "") | tonumber / 1024 / 1024 | floor | tostring + "Gi")
+      ]
+  )
+  | @tsv' | column -t
+}
+
 # Custom Aliases
 alias ll="ls -l"
 alias la="ls -A"
@@ -48,7 +75,6 @@ alias dcl="docker ps -a | grep Exit | cut -d ' ' -f 1 | xargs docker rm"
 alias dcp=docker-compose
 alias kb=kubectl
 alias kbcat="cat <<EOF | kubectl create -f -"
-alias kbnodes="kubectl get nodes -o custom-columns='TYPE:metadata.labels.type,ZONE:metadata.labels.failure-domain\.beta\.kubernetes\.io/zone,INSTANCE_TYPE:metadata.labels.beta\.kubernetes\.io/instance-type,CPUs:metadata.labels.karpenter\.k8s\.aws/instance-cpu,MEMORY:metadata.labels.karpenter\.k8s\.aws/instance-memory,PODS:metadata.labels.karpenter\.k8s\.aws/instance-pods,NAME:metadata.name'"
 alias neat="kubectl neat | yq eval -P"
 alias dci="docker rmi -f $(docker images --filter 'dangling=true' -q | tr '\n' ' ')" # → docker system prune
 
