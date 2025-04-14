@@ -1,6 +1,3 @@
-# Print current kubectl active context & namespace
-function kbctx() { echo "$(kubectl config current-context)/$(kubectl config view --minify -o jsonpath='{..namespace}')" }
-
 # Yarn query latest package release
 function yarn-latest() { yarn info $1 dist-tags.latest }
 
@@ -76,7 +73,9 @@ alias dcp=docker-compose
 alias kb=kubectl
 alias kbcat="cat <<EOF | kubectl create -f -"
 alias neat="kubectl neat | yq eval -P"
-alias dci="docker rmi -f $(docker images --filter 'dangling=true' -q | tr '\n' ' ')" # → docker system prune
+alias kbx='f() { [ "$1" ] && kubectl config use-context $1 || echo "$(kubectl config current-context)/$(kubectl config view --minify -o jsonpath='{..namespace}')" ; } ; f'
+alias kbn='f() { [ "$1" ] && kubectl config set-context --current --namespace $1 || kubectl config view --minify | grep namespace | cut -d" " -f6 ; } ; f'
+# alias dci="docker rmi -f $(docker images --filter 'dangling=true' -q | tr '\n' ' ')" # → docker system prune
 
 # Fix terraform aws-cli output requirement
 alias terraform="AWS_DEFAULT_OUTPUT=json terraform $1"
