@@ -55,3 +55,4 @@ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 - [**micro**](https://micro-editor.github.io/)
 - [**vs-code**](https://code.visualstudio.com/download)
 - **fira-code** font
+- [**nala**](https://gitlab.com/volian/nala/-/wikis/Installation)
