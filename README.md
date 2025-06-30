@@ -38,6 +38,7 @@ chsh -s $(which zsh)
 # Install NVM
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 ```
+- [Tweak WSL automount](https://superuser.com/a/1295442)
 
 - **zsh**
   - [pure](https://github.com/sindresorhus/pure)
