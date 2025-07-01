@@ -36,7 +36,7 @@ sudo dpkg-reconfigure locales
 
 sudo apt update && sudo apt upgrade
 sudo apt install zsh zsh-syntax-highlighting \
-  micro tree htop zip python3-virtualenv \
+  micro tree htop zip python3-virtualenv python3.12-venv \
   ca-certificates curl gnupg lsb-release
 
 # Pure shell
@@ -97,6 +97,23 @@ sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
 
 # k3d
 sudo wget -q -O - https://raw.githubusercontent.com/k3d-io/k3d/main/install.sh | bash
+
+# yq
+wgettz https://github.com/mikefarah/yq/releases/download/v4.45.4/yq_linux_amd64.tar.gz
+sudo mv yq_linux_amd64 /opt/yq-v4.45.4
+sudo ln -s /opt/yq-v4.45.4 /usr/local/bin/yq
+
+# Krew & neat
+(
+  set -x; cd "$(mktemp -d)" &&
+  OS="$(uname | tr '[:upper:]' '[:lower:]')" &&
+  ARCH="$(uname -m | sed -e 's/x86_64/amd64/' -e 's/\(arm\)\(64\)\?.*/\1\2/' -e 's/aarch64$/arm64/')" &&
+  KREW="krew-${OS}_${ARCH}" &&
+  curl -fsSLO "https://github.com/kubernetes-sigs/krew/releases/latest/download/${KREW}.tar.gz" &&
+  tar zxvf "${KREW}.tar.gz" &&
+  ./"${KREW}" install krew
+)
+kubectl krew install neat
 
 # gw
 git clone https://github.com/dougborg/gdub.git
