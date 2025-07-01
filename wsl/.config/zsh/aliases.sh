@@ -55,6 +55,28 @@ function fix-zsh-history() {
   rm ~/.zsh_history_corrupt
 }
 
+devbox() {
+  local instance_id="i-05809af7bd4c41881"
+
+  case "$1" in
+    start)
+      echo "Starting instance $instance_id..."
+      aws ec2 start-instances --instance-ids "$instance_id"
+      ;;
+    stop)
+      echo "Stopping instance $instance_id..."
+      aws ec2 stop-instances --instance-ids "$instance_id"
+      ;;
+    status)
+      echo "Fetching status for instance $instance_id..."
+      aws ec2 describe-instances --instance-ids "$instance_id" --query "Reservations[].Instances[].State.Name"
+      ;;
+    *)
+      echo "Usage: devbox {start|stop|status}"
+      ;;
+  esac
+}
+
 # Custom Aliases
 alias ll="ls -l"
 alias la="ls -A"
