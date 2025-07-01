@@ -98,6 +98,16 @@ sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
 sudo wget -q -O - https://raw.githubusercontent.com/k3d-io/k3d/main/install.sh | bash
 ```
 
+Set [more memory](https://learn.microsoft.com/en-us/windows/wsl/wsl-config#wslconfig) for WSL2
+```ps
+@"
+[wsl2]
+memory=50GB
+"@ | Set-Content -Encoding UTF8 "$env:UserProfile\.wslconfig"
+
+wsl --terminate Ubuntu-24.04
+```
+
 - **zsh**
   - [pure](https://github.com/sindresorhus/pure)
   - [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)
