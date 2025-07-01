@@ -28,14 +28,13 @@ on WSL:
 ```sh
 # sudores withouth password
 sudo visudo
-# add on las line:
+# add on last line:
 octavio ALL=(ALL) NOPASSWD: ALL
 
 sudo locale-gen "en_US.UTF-8"
 sudo dpkg-reconfigure locales
 
 sudo apt update && sudo apt upgrade
-
 sudo apt install zsh zsh-syntax-highlighting \
   micro tree htop zip ca-certificates curl gnupg lsb-release
 
@@ -74,6 +73,29 @@ sdk install gradle 8.6
 
 # Remove sourcing lines that nvm and sdkman added to zshrc
 head -n -7 ~/.zshrc > ~/temp_zshrc && mv ~/temp_zshrc ~/.zshrc
+
+# Git pager
+npm install -g diff-so-fancy
+
+cd ~/Downloads
+
+# k9s 
+wgettz https://github.com/derailed/k9s/releases/download/v0.50.6/k9s_Linux_amd64.tar.gz
+sudo mv k9s /opt/k9s-v0.50.6
+sudo ln -s /opt/k9s-v0.50.6 /usr/local/bin/k9s
+
+# Helm
+wgettz https://get.helm.sh/helm-v3.18.3-linux-amd64.tar.gz
+sudo mv linux-amd64/helm /opt/helm-v3.18.3
+sudo ln -s /opt/helm-v3.18.3 /usr/local/bin/helm
+
+# Kubectl
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+chmod +x kubectl
+sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+
+# k3d
+sudo wget -q -O - https://raw.githubusercontent.com/k3d-io/k3d/main/install.sh | bash
 ```
 
 - **zsh**
