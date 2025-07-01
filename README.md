@@ -36,7 +36,8 @@ sudo dpkg-reconfigure locales
 
 sudo apt update && sudo apt upgrade
 sudo apt install zsh zsh-syntax-highlighting \
-  micro tree htop zip ca-certificates curl gnupg lsb-release
+  micro tree htop zip python3-virtualenv \
+  ca-certificates curl gnupg lsb-release
 
 # Pure shell
 mkdir -p "$HOME/.zsh"
@@ -96,6 +97,10 @@ sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
 
 # k3d
 sudo wget -q -O - https://raw.githubusercontent.com/k3d-io/k3d/main/install.sh | bash
+
+# gw
+git clone https://github.com/dougborg/gdub.git
+sudo gdub/install && rm -rf gdub
 ```
 
 Set [more memory](https://learn.microsoft.com/en-us/windows/wsl/wsl-config#wslconfig) for WSL2
