@@ -34,7 +34,7 @@ octavio ALL=(ALL) NOPASSWD: ALL
 sudo apt update && sudo apt upgrade
 
 sudo apt install zsh zsh-syntax-highlighting \
-  micro tree htop ca-certificates curl gnupg lsb-release
+  micro tree htop zip ca-certificates curl gnupg lsb-release
 
 # Pure shell
 mkdir -p "$HOME/.zsh"
@@ -66,10 +66,11 @@ sudo ./aws/install
 
 # SDK man
 curl -s "https://get.sdkman.io" | bash
-head -n -3 ~/.zshrc > ~/temp_zshrc && mv ~/temp_zshrc ~/.zshrc
-# remove last 3 lines from zshrc sourcing and re-login
 sdk install java 11.0.27-tem
 sdk install gradle 8.6
+
+# Remove sourcing lines that nvm and sdkman added to zshrc
+head -n -7 ~/.zshrc > ~/temp_zshrc && mv ~/temp_zshrc ~/.zshrc
 ```
 
 - **zsh**
