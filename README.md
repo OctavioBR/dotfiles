@@ -31,6 +31,9 @@ sudo visudo
 # add on las line:
 octavio ALL=(ALL) NOPASSWD: ALL
 
+sudo locale-gen "en_US.UTF-8"
+sudo dpkg-reconfigure locales
+
 sudo apt update && sudo apt upgrade
 
 sudo apt install zsh zsh-syntax-highlighting \
