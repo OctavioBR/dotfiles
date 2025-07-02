@@ -37,7 +37,7 @@ sudo dpkg-reconfigure locales
 sudo apt update && sudo apt upgrade
 sudo apt install zsh zsh-syntax-highlighting \
   micro tree htop zip python3-virtualenv python3.12-venv \
-  ca-certificates curl gnupg lsb-release
+  ca-certificates curl gnupg lsb-release software-properties-common
 
 # Pure shell
 mkdir -p "$HOME/.zsh"
@@ -116,6 +116,11 @@ sudo ln -s /opt/yq-v4.45.4 /usr/local/bin/yq
   ./"${KREW}" install krew
 )
 kubectl krew install neat
+
+# Terraform
+wget -O- https://apt.releases.hashicorp.com/gpg | gpg --dearmor | sudo tee /usr/share/keyrings/hashicorp-archive-keyring.gpg > /dev/null
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(grep -oP '(?<=UBUNTU_CODENAME=).*' /etc/os-release || lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
+sudo apt update && sudo apt-get install terraform
 
 # gw
 git clone https://github.com/dougborg/gdub.git
