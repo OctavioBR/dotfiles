@@ -69,6 +69,8 @@ curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip
 unzip awscliv2.zip
 sudo ./aws/install
 
+sudo apt install wslu # to use BROWSER=wslview
+
 # SDK man
 curl -s "https://get.sdkman.io" | bash
 sdk install java 11.0.27-tem
