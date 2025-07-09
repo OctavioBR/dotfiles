@@ -12,18 +12,26 @@ export MICRO_TRUECOLOR=1
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+
 # Node
 NPM_PACKAGES="$HOME/.npm-packages"
 PATH="$NPM_PACKAGES/bin:$PATH"
 MANPATH="$MANPATH:$NPM_PACKAGES/share/man"
-# Go bin
-[ -s "/usr/local/go/bin" ] && PATH="$PATH:/usr/local/go/bin"
+
+# Go bin & GOPATH
+[ -d "/usr/local/go/bin" ] && PATH="$PATH:/usr/local/go/bin"
+[ -d "$HOME/Code/go" ] && export GOPATH="$HOME/Code/go"
+[ -d "$GOPATH/bin" ] && PATH="$PATH:$GOPATH/bin"
+
 # Python pip
 PATH="$HOME/.local/bin:$PATH"
+
 # Krew
 PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+
 # Pulumi
-PATH="$PATH:$HOME/.pulumi/bin"
+[ -d "$HOME/.pulumi/bin" ] && PATH="$PATH:$HOME/.pulumi/bin"
+
 # Java
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
