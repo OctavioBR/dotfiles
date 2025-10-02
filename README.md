@@ -36,8 +36,12 @@ sudo dpkg-reconfigure locales
 
 sudo apt update && sudo apt upgrade
 sudo apt install zsh zsh-syntax-highlighting \
-  micro tree htop zip jq dnsutils python3-virtualenv python3.12-venv \
+  micro tree htop zip jq bat dnsutils \
+  python3-virtualenv python3.12-venv \
   ca-certificates curl gnupg lsb-release software-properties-common
+
+# normalize bat package name clash
+sudo ln -s /usr/bin/batcat /usr/local/bin/bat
 
 # Pure shell
 mkdir -p "$HOME/.zsh"

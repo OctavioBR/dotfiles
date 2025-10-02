@@ -13,6 +13,18 @@ function whichl() { readlink $(which $1) }
 # Download the file and extract its contents in the current directory
 function wgettz() { wget -qO- "$1" | tar -xzv }
 
+# View files or directories in a user-friendly way
+v() {
+  if [ -f "$1" ]; then
+    LESS=" -R" LESSOPEN="| bat --color=always --plain --paging=never %s" less "$1"
+  elif [ -d "$1" ]; then
+    ls --almost-all --classify "$1"
+  else
+    echo "Error: '$1' is neither a file nor a directory." >&2
+    return 1
+  fi
+}
+
 # Swich aws-cli profiles
 function awsp() { [ -z "$1" ] && echo $AWS_PROFILE || export AWS_PROFILE=$1 }
 
