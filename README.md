@@ -45,7 +45,7 @@ sudo ln -s /usr/bin/batcat /usr/local/bin/bat
 
 # Pure shell
 mkdir -p "$HOME/.zsh"
-git clone --depth 1 https://github.com/sindresorhus/pure.git "$HOME/.zsh/pure"
+git clone --depth 1 https://github.com/OctavioBR/pure.git "$HOME/.zsh/pure"
 chsh -s $(which zsh)
 
 # Docker for Ubuntu (for debian use https://docs.docker.com/engine/install/debian/#install-using-the-repository)
