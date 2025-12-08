@@ -14,13 +14,14 @@ function whichl() { readlink $(which $1) }
 function wgettz() { wget -qO- "$1" | tar -xzv }
 
 # View files or directories in a user-friendly way
-v() {
-  if [ -f "$1" ]; then
-    LESS=" -R" LESSOPEN="| bat --color=always --plain --paging=never %s" less "$1"
-  elif [ -d "$1" ]; then
-    ls --almost-all --classify "$1"
+function v() {
+  local target="${1:-.}"
+  if [ -f "$target" ]; then
+    LESS=" -R" LESSOPEN="| bat --color=always --plain --paging=never %s" less "$target"
+  elif [ -d "$target" ]; then
+    ls --almost-all --classify --group-directories-first --color=always "$target"
   else
-    echo "Error: '$1' is neither a file nor a directory." >&2
+    echo "Error: '$target' is neither a file nor a directory." >&2
     return 1
   fi
 }
