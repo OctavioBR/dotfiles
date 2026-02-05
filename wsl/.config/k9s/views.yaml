@@ -1,0 +1,19 @@
+views:
+  v1/nodes:
+    columns:
+    - NAME
+    - NODE-TYPE:.metadata.labels['node-type']
+    - AGE
+    - PODS|N
+    - STATUS
+    - TAINTS
+    - VERSION
+    - INSTANCE_TYPE:.metadata.labels['beta\.kubernetes\.io/instance-type']
+    - ZONE:.metadata.labels['topology\.kubernetes\.io/zone']
+    - ROLE
+    - CPU
+    - MEM
+    - '%CPU'
+    - '%MEM'
+    - CPU/A
+    - MEM/A
