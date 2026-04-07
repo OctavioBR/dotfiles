@@ -12,6 +12,8 @@
 	co = checkout
 	st = status --short --branch
 	lg = log --color --graph
+	wt = worktree
+	wta = "!f(){ git worktree add -b \"$1\" .claude/worktrees/$1; }; f"
 	amend = commit --amend --no-edit
 	pushf = push --force-with-lease
 	pushs = push --push-option=ci.skip
@@ -55,5 +57,3 @@
 	gpgsign = true
 [gpg]
 	format = ssh
-[credential]
-	helper = /mnt/c/Users/octav/scoop/apps/git-credential-manager/current/git-credential-manager.exe
