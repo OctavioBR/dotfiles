@@ -1,6 +1,11 @@
 # TODOS & personal ignored #
 todo.md
 *.ignored*
+*.tfplan
+
+# Clade
+.claude/worktrees/
+CLAUDE.local.md
 
 # Editor Files #
 # .idea
