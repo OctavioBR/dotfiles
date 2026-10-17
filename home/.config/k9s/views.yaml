@@ -1,5 +1,6 @@
 views:
   v1/nodes:
+    sortColumn: AGE:desc
     columns:
     - NAME
     - NODE-TYPE:.metadata.labels['node-type']
@@ -17,3 +18,36 @@ views:
     - '%MEM'
     - CPU/A
     - MEM/A
+  v1/pods:
+    sortColumn: NODE:asc
+    columns:
+    - NAMESPACE
+    - NAME
+    - AGE
+    - READY
+    - STATUS
+    - RESTARTS
+    - NODE
+    - IMAGE_TAG:.spec.containers[0].image|split(":")|.[1]
+    - CPU
+    - MEM
+    - '%CPU/R'
+    - '%CPU/L'
+    - '%MEM/R'
+    - '%MEM/L'
+    - IP
+    - PF
+
+  v1/pods@grepr:
+    sortColumn: AGE:desc
+    columns:
+    - NAMESPACE
+    - NAME
+    - IMAGE_TAG:.spec.containers[0].image|split(":")|.[-1]
+
+  v1/pods@flink:
+    sortColumn: NAME:asc
+    columns:
+    - NAMESPACE
+    - NAME
+    - IMAGE_TAG:.spec.containers[0].image|split(":")|.[-1]

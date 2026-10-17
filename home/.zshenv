@@ -1,12 +1,13 @@
 # PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
-# export LANGUAGE=en_US
-# export GTK_IM_MODULE=cedilla
-# export GPG_TTY=$(tty) # For WSL2
+# export GTK_IM_MODULE="cedilla gtk3-demo"
+# export QT_IM_MODULE=cedilla
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
+# export LANGUAGE=en_US
 export TERM="xterm-256color"
 export SSH_KEY_PATH="~/.ssh/id_ed25519"
 export MICRO_TRUECOLOR=1
+export LESSCHARSET="utf-8"
 
 # Load NVM
 export NVM_DIR="$HOME/.nvm"
@@ -19,8 +20,8 @@ PATH="$NPM_PACKAGES/bin:$PATH"
 MANPATH="$MANPATH:$NPM_PACKAGES/share/man"
 
 # Go bin & GOPATH
+GOPATH="$HOME/go"
 [ -d "/usr/local/go/bin" ] && PATH="$PATH:/usr/local/go/bin"
-[ -d "$HOME/Code/go" ] && export GOPATH="$HOME/Code/go"
 [ -d "$GOPATH/bin" ] && PATH="$PATH:$GOPATH/bin"
 
 # Python pip
@@ -29,15 +30,18 @@ PATH="$HOME/.local/bin:$PATH"
 # Krew
 PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
+# tfswitch
+PATH="$PATH:$HOME/bin"
+
+# opencode
+PATH="$HOME/.opencode/bin:$PATH"
+
 # Pulumi
 [ -d "$HOME/.pulumi/bin" ] && PATH="$PATH:$HOME/.pulumi/bin"
 
 # Java
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
-
-# Open terminal links in win browser (depends on wslu)
-export BROWSER=wslview
 
 export PATH
 export MANPATH
@@ -50,3 +54,5 @@ else
 fi
 # Emacs alternate editor
 export ALTERNATE_EDITOR=micro
+
+[ -s "$HOME/.secretenv" ] && source "$HOME/.secretenv"

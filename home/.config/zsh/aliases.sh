@@ -14,14 +14,13 @@ function whichl() { readlink $(which $1) }
 function wgettz() { wget -qO- "$1" | tar -xzv }
 
 # View files or directories in a user-friendly way
-function v() {
-  local target="${1:-.}"
-  if [ -f "$target" ]; then
-    LESS=" -R" LESSOPEN="| bat --color=always --plain --paging=never %s" less "$target"
-  elif [ -d "$target" ]; then
-    ls --almost-all --classify --group-directories-first --color=always "$target"
+v() {
+  if [ -f "$1" ]; then
+    LESS=" -R" LESSOPEN="| bat --color=always --plain --paging=never %s" less "$1"
+  elif [ -d "$1" ]; then
+    ls --almost-all --classify "$1"
   else
-    echo "Error: '$target' is neither a file nor a directory." >&2
+    echo "Error: '$1' is neither a file nor a directory." >&2
     return 1
   fi
 }
@@ -90,6 +89,48 @@ devbox() {
   esac
 }
 
+format_json() {
+  node -e '
+    const input = require("fs").readFileSync(0, "utf8");
+    const data = JSON.parse(input);
+
+    function customFormat(obj, indent = 0) {
+      const s = "  ".repeat(indent);
+      const ns = "  ".repeat(indent + 1);
+
+      if (Array.isArray(obj)) {
+        if (obj.length === 0) return "[]";
+
+        // Rule: Fit short string arrays or simple nested arrays on one line
+        const isSimpleArray = obj.every(i => typeof i === "string" || (Array.isArray(i) && i.every(j => typeof j === "string")));
+        if (isSimpleArray && JSON.stringify(obj).length < 100) {
+          return JSON.stringify(obj);
+        }
+
+        // Rule: Single object in a list [{ data }]
+        // FIXED: Removed the extra curly braces around the inner content
+        if (obj.length === 1 && typeof obj[0] === "object" && obj[0] !== null) {
+          const inner = customFormat(obj[0], indent + 1).trim();
+          return "[{\n" + ns + inner + "\n" + s + "}]";
+        }
+
+        // Standard Array
+        return "[\n" + obj.map(item => ns + customFormat(item, indent + 1)).join(",\n") + `\n${s}]`;
+      }
+
+      if (typeof obj === "object" && obj !== null) {
+        const keys = Object.keys(obj);
+        if (keys.length === 0) return "{}";
+        return "{\n" + keys.map(k => `${ns}"${k}": ${customFormat(obj[k], indent + 1)}`).join(",\n") + `\n${s}}`;
+      }
+
+      return JSON.stringify(obj);
+    }
+
+    console.log(customFormat(data));
+  '
+}
+
 # Custom Aliases
 alias ll="ls -l"
 alias la="ls -A"
@@ -123,8 +164,7 @@ alias tfgrapth="terraform plan -out=plan && terraform show -json plan > plan.ign
 alias tf=terraform
 alias pl=pulumi
 
-# WSL2 ports
-alias pbcopy="clip.exe"
+alias pbcopy="xclip -selection clipboard"
 
 # Project home links
 alias github='cd ~/Code/github.com'
