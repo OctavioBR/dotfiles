@@ -1,30 +1,4 @@
-# My workstation config 👨‍💻 (Windows)
-```powershell
-winget install Microsoft.PowerToys --source winget
-winget install --id Microsoft.PowerShell --source winget
-
-# Install scoop with utility apps
-Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
-Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
-scoop install git
-scoop bucket add nerd-fonts
-scoop install firacode
-scoop bucket add extras
-scoop install vscode
-reg import "C:\Users\octav\scoop\apps\vscode\current\install-context.reg"
-reg import "C:\Users\octav\scoop\apps\vscode\current\install-associations.reg"
-scoop install winrar
-scoop install hwmonitor
-
-# WSL
-wsl --install
-wsl --install -d Ubuntu-24.04
-wsl --set-default Ubuntu-24.04
-```
-
-- [Tweak WSL automount](https://superuser.com/a/1295442)
-
-on WSL:
+# My workstation config 👨‍💻 (Debian Linux)
 ```sh
 # sudores withouth password
 sudo visudo
@@ -48,14 +22,19 @@ mkdir -p "$HOME/.zsh"
 git clone --depth 1 https://github.com/OctavioBR/pure.git "$HOME/.zsh/pure"
 chsh -s $(which zsh)
 
-# Docker for Ubuntu (for debian use https://docs.docker.com/engine/install/debian/#install-using-the-repository)
+# Docker for Debian https://docs.docker.com/engine/install/debian/#install-using-the-repository
 sudo install -m 0755 -d /etc/apt/keyrings
-sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+sudo curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc
 sudo chmod a+r /etc/apt/keyrings/docker.asc
-echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
-  $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}") stable" | \
-  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-sudo apt-get update && sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+sudo tee /etc/apt/sources.list.d/docker.sources <<EOF
+Types: deb
+URIs: https://download.docker.com/linux/debian
+Suites: $(. /etc/os-release && echo "$VERSION_CODENAME")
+Components: stable
+Architectures: $(dpkg --print-architecture)
+Signed-By: /etc/apt/keyrings/docker.asc
+EOF
+sudo apt-get update && sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
 # Non root access
 sudo usermod -aG docker octavio
@@ -73,12 +52,10 @@ curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip
 unzip awscliv2.zip
 sudo ./aws/install
 
-sudo apt install wslu # to use BROWSER=wslview
-
 # SDK man
 curl -s "https://get.sdkman.io" | bash
-sdk install java 11.0.27-tem
-sdk install gradle 8.6
+#sdk install java 11.0.27-tem
+#sdk install gradle 8.6
 
 # Remove sourcing lines that nvm and sdkman added to zshrc
 head -n -7 ~/.zshrc > ~/temp_zshrc && mv ~/temp_zshrc ~/.zshrc
@@ -148,16 +125,6 @@ out=$(mktemp) && wget -nv -O$out https://cli.github.com/packages/githubcli-archi
   && sudo mkdir -p -m 755 /etc/apt/sources.list.d \
   && echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null \
   && sudo apt update && sudo apt install gh -y
-```
-
-Set [more memory](https://learn.microsoft.com/en-us/windows/wsl/wsl-config#wslconfig) for WSL2
-```ps
-@"
-[wsl2]
-memory=50GB
-"@ | Set-Content -Encoding UTF8 "$env:UserProfile\.wslconfig"
-
-wsl --terminate Ubuntu-24.04
 ```
 
 - **zsh**
