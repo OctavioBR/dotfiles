@@ -5,6 +5,7 @@ keybind = alt+minus=new_split:down
 keybind = alt+equal=new_split:right
 
 keybind = ctrl+v=paste_from_clipboard
+keybind = performable:ctrl+c=copy_to_clipboard
 
 keybind = ctrl+t=new_tab
 keybind = ctrl+w=close_surface
